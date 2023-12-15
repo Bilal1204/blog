@@ -5,58 +5,35 @@ import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-const  Login= () => {
-
-  const router = useRouter();
-
-const [user, setUser] = useState({
-  username: '',
-  password: ''
-})
-  const handleLogin = async () => {
-    try {
-      const res = await axios.post('/api/login', user)
-      console.log(res.data)
-      router.push(`/${user.username}`)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const  Home= () => {
 
   return (
-    <div className='grid grid-cols-12 h-screen bg-neutral-800'>
-      
-      <div className='col-span-4 relative'>
-        <img className='absolute inset-0 object-cover w-full h-full' src='/bgimage.png'/>
-        <div className="w-[100vh] h-screen left-[100%] absolute origin-top-left rotate-90 border-t-4  border-green-400"></div>   
-        <div className="w-full h-screen left-0 top-0 absolute bg-neutral-800 bg-opacity-30"></div>
-        <div className="left-1/3 top-2/3 absolute origin-top-left -rotate-90 text-white text-[64px] font-bold font-['Lexend Deca']">Login</div>
-      </div>
+    <div className='lg:grid lg:grid-cols-12 h-screen bg-neutral-800 p-10 lg:p-0'>
 
-  <div className='m-20 col-span-8 flex items-center justify-start '>
+    <div className='lg:col-span-1'>
+      <div className='flex flex-row lg:flex-col justify-between lg:justify-center items-center border lg:border-0 border-green-400 lg:border-none p-2 lg:p-0
+      fixed lg:relative bottom-0 inset-x-0 m-10 lg:m-0'>
+          <div className="mt-0 lg:mt-24 flex justify-center items-center text-2xl text-black font-semibold w-14 h-14 bg-green-400 rounded-full ml-2 lg:ml-0">
+            B
+          </div>
+          <Link href='/login' className='cursor-pointer'>
+            <img className='pt-2 lg:pt-6 pl-1' src="/search.svg" alt="" />
+            <p className='hidden lg:block'>search</p>
+          </Link>
+          <Link href='/' className='cursor-pointer'>
+            <img className='pt-2 lg:pt-6 pl-2' src="/trending.svg" alt="" />
+            <p className='hidden lg:block'>trending</p>
+          </Link>
+          <Link className='cursor-pointer mr-2 lg:mr-0' href='/'>
+            <img className='pt-2 lg:pt-24 pl-1' src="/add.svg" alt="" />
+            <p className='hidden lg:block'>create</p>
+          </Link>
+        </div>
+    </div>
 
-  <div className='flex flex-col items-start p-3 w-full max-w-md'>
-
-    <h1 className="text-white text-5xl font-normal font-['DM Serif Display']">Welcome</h1>
-    <p className="text-neutral-400 text-2xl font-light font-['Lexend Deca']">Let’s log you in quickly</p>
-
-      <input onChange={(e) => setUser({...user, username: e.target.value})} value={user.username} className="sm:items-center md:items-start mt-10 p-5 w-full bg-neutral-800 border-2 border-green-400 text-neutral-400 text-base font-light font-['Lexend Deca'] focus:border-green-500" type="text" placeholder='Enter Your Username'/>
-
-      <input onChange={(e) => setUser({...user, password: e.target.value})} value={user.password} className="sm:items-center md:items-start mt-10 p-5 w-full bg-neutral-800 border-2 border-green-400 text-neutral-400 text-base font-light font-['Lexend Deca'] focus:border-green-500" type="password" placeholder='Enter Your Password'/>
-
-      <div className='mt-10 w-full flex flex-row justify-between'>
-
-      <button onClick={handleLogin} className="pt-3 pb-3 pl-7 pr-7 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca'">LOGIN</button>
-
-      <div className='flex flex-col items-end'>
-      <p className="text-white text-xl font-normal font-['Lexend Deca']">don’t have an account?</p><Link href='/signup' className="text-green-400 text-xl font-normal font-['Lexend Deca']">signup</Link>
-      </div>
-      </div>
-
-</div>  
-</div>
+    <div className="hidden lg:block w-[100vh] h-screen left-[100%] origin-top-left rotate-90 border-t-2  border-green-400"></div> 
     </div>
   )
 }
 
-export default Login
+export default Home
