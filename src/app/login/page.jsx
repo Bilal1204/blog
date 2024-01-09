@@ -32,7 +32,7 @@ const Login = () => {
         <div className="left-1/3 top-2/3 absolute origin-top-left -rotate-90 text-white text-[64px] font-bold font-['Lexend Deca']">Login</div>
     </div>
 
-    <div className='sm:col-span-1 md:col-span-8 m-20'>
+    <div className='sm:col-span-1 md:col-span-8 m-8 lg:m-20'>
         <div className='flex flex-col items-center md:items-start justify-center md:justify-start '>
             
             <h1 className="text-white text-5xl font-normal font-['DM Serif Display']">Welcome</h1>
