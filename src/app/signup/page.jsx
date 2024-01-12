@@ -59,7 +59,7 @@ const Signup = () => {
             
             <div className='flex flex-col items-end'>
 
-            <p className="text-white text-xl font-normal font-['Lexend Deca']">don’t have an account?</p>
+            <p className="text-white text-xl font-normal font-['Lexend Deca']">Already have an account?</p>
             <Link href='/login' className="text-green-400 text-xl font-normal font-['Lexend Deca']">login</Link>
             </div>
 

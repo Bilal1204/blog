@@ -5,22 +5,28 @@ import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import Blogs from './components/Blogs';
+import {useDispatch, useSelector } from 'react-redux';
+import { addBlog } from './redux/slices/blogSlice';
 
 const  Home= () => {
 
-  const [user, setUser] = useState()
+  // const [user, setUser] = useState()
+  const user = useSelector(state => state.user.user)
   const [loading, setLoading] = useState(true)
   const [blogs, setBlogs] = useState([]);
+  // const blogs = useSelector(state => state.blogs.blogs)
   const [page, setPage] = useState(1);
   const limit = 10; 
 
   const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res= await axios.get(`/api/blogs?page=${page}&limit=${limit}`)
         setBlogs(res.data.blogs);
+        dispatch(addBlog(res.data.blogs))
       } catch (error) {
         console.log(error);
       } finally {
@@ -29,21 +35,6 @@ const  Home= () => {
     };
     fetchData();
   }, [page]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('/api/me');
-        setUser(res.data.user);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchData();
-  }, []);
 
   const handleLogout = async() =>{
     try {

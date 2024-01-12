@@ -9,15 +9,15 @@ import jwt from "jsonwebtoken";
 
 connect();
 
-export const GET = async (req) => {
-    try {
-        const data = await getDataFromToken(req);
-        const user = await User.findById(data.id);
-        return NextResponse.json({message: 'success', user});
-    } catch (error) {
-        return NextResponse.json({message: error.message});
-    }
-}
+// export const GET = async (req) => {
+//     try {
+//         const data = await getDataFromToken(req);
+//         const user = await User.findById(data.id);
+//         return NextResponse.json({message: 'success', user});
+//     } catch (error) {
+//         return NextResponse.json({message: error.message});
+//     }
+// }
 
 export const PUT = async (req) => {
     try {
@@ -26,8 +26,7 @@ export const PUT = async (req) => {
         const user = {
             username: data.username,
             name: data.name,
-            email: data.email,
-            password: data.password
+            email: data.email
         }
         // console.log({user});
         if(newPassword === ''){
@@ -38,8 +37,7 @@ export const PUT = async (req) => {
             const salt = await bcryptjs.genSalt(10);
             const hashedPassword = await bcryptjs.hash(newPassword, salt);
             user.password = hashedPassword;
-            const updatedUser = await User.findOneAndUpdate({username: user.username}, user, {new: true});
-            updatedUser.password = newPassword;
+            const updatedUser = await User.findOneAndUpdate({username: user.username}, user, {new: true}).select('-password');
             return NextResponse.json({message: 'success', updatedUser});
         }
     } catch (error) {

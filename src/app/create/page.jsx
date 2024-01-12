@@ -4,34 +4,24 @@ import Navbar from '../components/Navbar';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useSelector , useDispatch} from 'react-redux';
+import { addBlog } from '../redux/slices/blogSlice';
 
 const Create = () => {
 
-  const [user, setUser] = useState()
+  const dispatch = useDispatch()
+  // const [user, setUser] = useState()
+  const user = useSelector(state => state.user.user)
   const [loading, setLoading] = useState(true)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   
   const router = useRouter()
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('/api/me');
-        setUser(res.data.user);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
 
   const handlePublish = async () =>{
     try {
       const res = await axios.post('/api/blogs', {title, content, userName : user.username, userId : user._id});
+      dispatch(addBlog(res.data.savedBlog))
       toast.success("Blog Published Successfully");
     } catch (error) {
       toast.error("Blog Publish Failed");

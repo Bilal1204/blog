@@ -24,8 +24,10 @@ export const POST = async (req) => {
             username: user.username,
             name: user.name,
         }
+        const newUser = user.toObject();
+        delete newUser.password;
         const token = jwt.sign(tokenData, process.env.JWT_SECRET, {expiresIn: "1d"});
-        const response = NextResponse.json({message: "User logged in successfully", token, status: 200})
+        const response = NextResponse.json({message: "User logged in successfully", user : newUser, status: 200})
         response.cookies.set('token', token, {httpOnly: true});
         return response;
     } catch (error) {

@@ -2,6 +2,8 @@
 import React,{useState, useEffect} from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import {toast} from 'react-toastify'
+import Link from 'next/link'
 
 const Blog = ({params}) => {
     const router = useRouter();
@@ -13,7 +15,12 @@ useEffect(() => {
   const fetchData = async () => {
       try {
         const res = await axios.get(`/api/blogs?id=${id}`);
-        setBlog(res.data.blog);
+        if(res.data.status === 404){
+          toast.error("Blog Not Found")
+        }
+        else{
+          setBlog(res.data.blog);
+        }
       } catch (error) {
         console.log(error);
     }
@@ -31,11 +38,10 @@ const year = dateObject.getFullYear();
     return (
         <div className='flex flex-col pt-10 pl-10 pr-10 lg:pl-20 lg:pr-20 bg-neutral-800 min-h-screen'>
         <h1 className='text-green-400 text-3xl font-bold'>{blog?.title}</h1>
-        <p>written by @{blog?.userName}</p>
+        <p>written by <span className='text-green-400'><Link href={`/users/${blog?.userName}`}>@{blog?.userName}</Link></span></p>
         <p className='pb-10'>on {date} {months[month]} {year}</p>
         <p className='text-white text-lg'>{blog?.content}</p>
         </div>
-
     )
 }
 

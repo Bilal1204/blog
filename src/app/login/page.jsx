@@ -1,24 +1,37 @@
 "use client";
 import React,{useState, useEffect} from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useDispatch } from 'react-redux';
+import { loginStart, loginSuccess, loginFailure } from '../redux/slices/userSlice';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
 
   const [user, setUser] = useState({
     username: '',
     password: ''
   })
+
     const handleLogin = async () => {
+      dispatch(loginStart())
       try {
         const res = await axios.post('/api/login', user)
-        console.log(res.data)
-        router.push(`/`)
+        if(res.data.status === 400 || res.data.status === 404){
+          toast.error("Invalid Credentials")
+        }
+        else{
+          dispatch(loginSuccess(res.data.user))
+          console.log({user : res.data.user})
+          router.push(`/`)
+        }
       } catch (error) {
-        console.log(error)
+        dispatch(loginFailure(error.toString()))
+        toast.error("Login Failed")
       }
     }
 
@@ -47,7 +60,7 @@ const Login = () => {
             <button onClick={handleLogin} className="p-2 md:p-5 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca'">LOGIN</button>
 
             <div className='flex flex-col items-end'>
-            <p className="text-white text-xl font-normal font-['Lexend Deca']">don’t have an account?</p>
+            <p className="text-white text-xl font-normal font-['Lexend Deca']">Don't have an account?</p>
             <Link href='/signup' className="text-green-400 text-xl font-normal font-['Lexend Deca']">signup</Link>
             </div>
             </div>
