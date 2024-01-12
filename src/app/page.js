@@ -84,8 +84,8 @@ const  Home= () => {
 
     {
       blogs?.map(blog => 
-      <div className='lg:col-span-11'>
-       <Blogs key={blog._id} blog={blog}/> 
+      <div key={blog._id} className='lg:col-span-11'>
+       <Blogs blog={blog}/> 
       </div>
       )
     }

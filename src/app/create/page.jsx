@@ -32,7 +32,7 @@ const Create = () => {
       <div className='bg-neutral-800'>
       <Navbar/>
       <div className='flex flex-col items-center  p-10'>
-          <h1  className='font-bold text-5xl text-green-400 pt-2 pb-5 lg:pb-0'>{user?.name}'s Blog</h1>
+          <h1  className='font-bold text-5xl text-green-400 pt-2 pb-5 lg:pb-0'>{user?.name}s Blog</h1>
           <div className='flex flex-col align-center p-10 w-full'>
               <div className='lg:grid lg:grid-cols-10'>
               <h1 className='lg:col-span-2 font-bold text-5xl text-green-400 pt-2 pb-5 lg:pb-0'>Title</h1>
@@ -49,7 +49,7 @@ const Create = () => {
       <div className='flex flex-row'>
       <button onClick={handlePublish} className="m-5 p-2 md:p-5 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca'">Publish</button>
       
-      <button onClick={() => {router.push('/')}} className="m-5 p-2 md:p-5 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca'">Home</button>
+      <button onClick={() => {router.push('/')}} className="m-5 p-2 md:p-5 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca']">Home</button>
       </div>
       </div>
 

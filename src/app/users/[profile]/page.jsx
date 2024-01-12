@@ -57,7 +57,7 @@ const Profile = ({params})=> {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3">
-          {blogs?.map(blog =><Card blog={blog}/>)}
+          {blogs?.map(blog =><Card key={blog._id} blog={blog}/>)}
         </div>
         {
           blogs?.length === 0 && 
