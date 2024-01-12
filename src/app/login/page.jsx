@@ -60,7 +60,7 @@ const Login = () => {
             <button onClick={handleLogin} className="p-2 md:p-5 bg-green-400 text-black text-xl font-semibold font-['Lexend Deca'">LOGIN</button>
 
             <div className='flex flex-col items-end'>
-            <p className="text-white text-xl font-normal font-['Lexend Deca']">Don't have an account?</p>
+            <p className="text-white text-xl font-normal font-['Lexend Deca']">Dont have an account?</p>
             <Link href='/signup' className="text-green-400 text-xl font-normal font-['Lexend Deca']">signup</Link>
             </div>
             </div>
