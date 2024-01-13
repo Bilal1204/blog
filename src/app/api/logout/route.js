@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = () => {
+export const GET = (req) => {
     try {
         const response = NextResponse.json({
             message: "User Logged Out Successfully",
@@ -8,9 +8,11 @@ export const GET = () => {
         });
         response.cookies.set("token", "", {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', 
-            sameSite: 'lax', 
             expires: new Date(0),
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            domain: process.env.NODE_ENV === "production" ? process.env.DOMAIN : "localhost",
         });
         return response;       
     } catch (error) {
