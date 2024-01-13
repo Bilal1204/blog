@@ -56,7 +56,7 @@ useEffect(() => {
   }, [])
 
   return (
-    <div className='flex flex-col justify-center align-middle w-full min-h-screen bg-neutral-800'>
+    <div className='flex flex-col justify-center align-middle w-full min-h-screen bg-neutral-800 p-2'>
     <Navbar />
     <div className='grid grid-cols-12'>
         <div className='col-span-5'></div>

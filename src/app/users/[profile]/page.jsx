@@ -18,7 +18,7 @@ const Profile = ({params})=> {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`/api/users?uname=${profile}`)
+        const res = await axios.get(`/api/users/${profile}`)
         setUser(res.data.user)
         setBlogs(res.data.blogs)
       } catch (error) {

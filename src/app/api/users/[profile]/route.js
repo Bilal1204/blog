@@ -11,9 +11,9 @@ connect();
 
 export const GET = async (req) => {
     try {
-        const uname = req.nextUrl.searchParams.get('uname');
-        const user = await User.findOne({username: uname}).select("-password");
-        const blogs = await Blog.find({userName: uname});
+        const username = req.url.split('users/')[1]
+        const user = await User.findOne({username}).select("-password");
+        const blogs = await Blog.find({userName : username});
         if(!user){
             return NextResponse.json({message: "User not found", status: 404});
         }

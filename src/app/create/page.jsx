@@ -31,7 +31,7 @@ const Create = () => {
   return (
       <div className='bg-neutral-800'>
       <Navbar/>
-      <div className='flex flex-col items-center  p-10'>
+      <div className='flex flex-col items-center p-2 lg:p-10'>
           <h1  className='font-bold text-5xl text-green-400 pt-2 pb-5 lg:pb-0'>{user?.name}s Blog</h1>
           <div className='flex flex-col align-center p-10 w-full'>
               <div className='lg:grid lg:grid-cols-10'>
